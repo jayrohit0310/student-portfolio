@@ -1,70 +1,163 @@
-function Projects({ projectList }) {
+import { useEffect, useState } from "react";
+
+import Spinner from "./Spinner";
+import ErrorMessage from "./ErrorMessage";
+
+function Projects() {
+
+  const [repos, setRepos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [search, setSearch] = useState("");
+
+  // Replace with your GitHub username
+  const username = "jayrohit0310";
+
+  const fetchRepositories = async () => {
+
+    setLoading(true);
+    setError(null);
+
+    try {
+
+      const response = await fetch(
+        `https://api.github.com/users/${username}/repos`
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch GitHub repositories.");
+      }
+
+      const data = await response.json();
+
+      setRepos(data);
+
+    } catch (err) {
+
+      setError(err.message);
+
+    } finally {
+
+      setLoading(false);
+
+    }
+
+  };
+
+  useEffect(() => {
+
+    fetchRepositories();
+
+  }, []);
+
+  const filteredRepos = repos.filter((repo) =>
+    repo.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return (
+      <ErrorMessage
+        message={error}
+        onRetry={fetchRepositories}
+      />
+    );
+  }
+
   return (
-    <section id="projects" className="projects">
+    <section className="projects">
 
       <div className="section-title">
-        <h2>My Projects</h2>
-        <p>Some of my recent work and academic projects</p>
+
+        <h2>GitHub Repositories</h2>
+
+        <p>
+          Repositories fetched dynamically using the GitHub REST API.
+        </p>
+
+      </div>
+
+      <div className="search-box">
+
+        <input
+          type="text"
+          placeholder="Search Repository..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
       </div>
 
       <div className="projects-container">
 
-        {projectList.map((project, index) => (
-          <div className="project-card" key={index}>
+        {filteredRepos.length > 0 ? (
 
-            <div className="project-image">
-              <h1>🚀</h1>
-            </div>
+          filteredRepos.map((repo) => (
 
-            <div className="project-content">
+            <div
+              className="project-card"
+              key={repo.id}
+            >
 
-              <h3>{project.title}</h3>
+              <div className="project-content">
 
-              <span className="project-tech">
-                {project.tech}
-              </span>
+                <h3>{repo.name}</h3>
 
-              <p>
-                {project.description}
-              </p>
+                <span className="project-tech">
 
-              <div className="project-features">
+                  ⭐ {repo.stargazers_count} Stars
 
-                <span>✔ Responsive UI</span>
-                <span>✔ Clean Code</span>
-                <span>✔ Modern Design</span>
+                </span>
+
+                <p>
+
+                  {repo.description
+                    ? repo.description
+                    : "No description available."}
+
+                </p>
+
+                <div className="project-features">
+
+                  <span>🍴 Forks: {repo.forks_count}</span>
+
+                  <span>{repo.language || "Unknown"}</span>
+
+                </div>
+
+                <div className="project-buttons">
+
+                  <a
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <button className="primary-btn">
+
+                      View Repository
+
+                    </button>
+
+                  </a>
+
+                </div>
 
               </div>
 
-              <div className="project-buttons">
-
-                <button className="primary-btn">
-                  View Project
-                </button>
-
-                <button className="secondary-btn">
-                  GitHub
-                </button>
-
-              </div>
-
             </div>
 
-          </div>
-        ))}
+          ))
 
-      </div>
+        ) : (
 
-      <div className="projects-footer">
+          <h2 style={{ textAlign: "center" }}>
+            No repositories found.
+          </h2>
 
-        <h3>More exciting projects are coming soon...</h3>
-
-        <p>
-          I enjoy building practical applications using
-          React, Python, Machine Learning, and Full-Stack
-          Development. Every project helps me learn new
-          technologies and improve my problem-solving skills.
-        </p>
+        )}
 
       </div>
 
