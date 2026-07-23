@@ -1206,3 +1206,67 @@ section{
     min-width:220px;
 
 }
+
+/* ===========================
+   Spinner
+=========================== */
+
+.spinner-container{
+
+    min-height:70vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+.spinner{
+
+    width:70px;
+
+    height:70px;
+
+    border:8px solid #1e293b;
+
+    border-top:8px solid #6366f1;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+    margin-bottom:25px;
+
+}
+
+.spinner-container h2{
+
+    color:#8b5cf6;
+
+    margin-bottom:12px;
+
+}
+
+.spinner-container p{
+
+    color:#cbd5e1;
+
+}
+
+@keyframes spin{
+
+    0%{
+        transform:rotate(0deg);
+    }
+
+    100%{
+        transform:rotate(360deg);
+    }
+
+}
