@@ -1270,3 +1270,67 @@ section{
     }
 
 }
+
+/* ===========================
+   Error Message
+=========================== */
+
+.error-container{
+
+    min-height:70vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:50px;
+
+}
+
+.error-card{
+
+    width:600px;
+
+    max-width:100%;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.06);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:20px;
+
+    padding:40px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.error-card h1{
+
+    font-size:70px;
+
+    margin-bottom:15px;
+
+}
+
+.error-card h2{
+
+    color:#ef4444;
+
+    margin-bottom:20px;
+
+}
+
+.error-card p{
+
+    color:#cbd5e1;
+
+    margin-bottom:30px;
+
+    line-height:1.8;
+
+}
