@@ -1334,3 +1334,221 @@ section{
     line-height:1.8;
 
 }
+
+/* ===========================
+   GitHub Projects Section
+=========================== */
+
+.search-box{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-bottom:50px;
+
+}
+
+.search-box input{
+
+    width:450px;
+
+    max-width:90%;
+
+    padding:15px 20px;
+
+    border:none;
+
+    border-radius:40px;
+
+    outline:none;
+
+    font-size:17px;
+
+    background:#1e293b;
+
+    color:white;
+
+    transition:.3s;
+
+}
+
+.search-box input:focus{
+
+    box-shadow:0 0 20px #6366f1;
+
+}
+
+.search-box input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+/* ===========================
+   Repository Cards
+=========================== */
+
+.projects-container{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+
+    gap:30px;
+
+}
+
+.project-card{
+
+    background:rgba(255,255,255,.05);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.4s;
+
+    backdrop-filter:blur(12px);
+
+}
+
+.project-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 12px 35px rgba(99,102,241,.35);
+
+}
+
+.project-content h3{
+
+    color:white;
+
+    font-size:24px;
+
+    margin-bottom:15px;
+
+}
+
+.project-tech{
+
+    display:inline-block;
+
+    background:#6366f1;
+
+    color:white;
+
+    padding:8px 16px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+    margin-bottom:18px;
+
+}
+
+.project-content p{
+
+    color:#cbd5e1;
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+
+    min-height:70px;
+
+}
+
+.project-features{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-bottom:25px;
+
+}
+
+.project-features span{
+
+    background:#1e293b;
+
+    color:#8b5cf6;
+
+    padding:8px 14px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
+    font-weight:500;
+
+}
+
+.project-buttons{
+
+    display:flex;
+
+    justify-content:flex-start;
+
+}
+
+.project-buttons a{
+
+    text-decoration:none;
+
+}
+
+.project-buttons button{
+
+    width:100%;
+
+}
+
+/* ===========================
+   No Repository Found
+=========================== */
+
+.no-data{
+
+    text-align:center;
+
+    font-size:24px;
+
+    color:#94a3b8;
+
+    margin-top:40px;
+
+}
+
+/* ===========================
+   Responsive Design
+=========================== */
+
+@media(max-width:768px){
+
+    .search-box input{
+
+        width:100%;
+
+    }
+
+    .projects-container{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .project-card{
+
+        padding:20px;
+
+    }
+
+}
