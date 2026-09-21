@@ -1,101 +1,86 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import Projects from "./components/Projects";
 import NotFound from "./pages/NotFound";
+
+// Lazy Loading
+const Projects = lazy(() => import("./components/Projects"));
+const Contact = lazy(() => import("./pages/Contact"));
 
 import "./App.css";
 
 function App() {
+    const [darkMode, setDarkMode] = useState(true);
 
-  const [darkMode, setDarkMode] = useState(true);
+    const portfolioData = {
+        name: "Jay Rohit",
+        email: "jayrohit0310@gmail.com",
+        role: "AI & Full Stack Developer",
+        theme: darkMode ? "dark" : "light"
+    };
 
-  const portfolioData = {
-
-    name: "Jay Rohit",
-
-    email: "jayrohit0310@gmail.com",
-
-    role: "AI & Full Stack Developer",
-
-    theme: darkMode ? "dark" : "light"
-
-  };
-
-  return (
-
-    <div className={darkMode ? "app dark-theme" : "app light-theme"}>
-
-      <Navbar
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
-      />
-
-      <Routes>
-
-        <Route
-
-          path="/"
-
-          element={
-
-            <Home
-
-              name={portfolioData.name}
-
-              role={portfolioData.role}
-
+    return (
+        <div
+            className={
+                darkMode
+                    ? "app dark-theme"
+                    : "app light-theme"
+            }
+        >
+            <Navbar
+                darkMode={darkMode}
+                setDarkMode={setDarkMode}
             />
 
-          }
+            <Suspense
+                fallback={
+                    <div className="page-loading">
+                        <div className="loading-spinner"></div>
+                        <p>Loading page...</p>
+                    </div>
+                }
+            >
+                <Routes>
 
-        />
+                    <Route
+                        path="/"
+                        element={
+                            <Home
+                                name={portfolioData.name}
+                                role={portfolioData.role}
+                            />
+                        }
+                    />
 
-        <Route
+                    <Route
+                        path="/projects"
+                        element={<Projects />}
+                    />
 
-          path="/projects"
+                    <Route
+                        path="/contact"
+                        element={
+                            <Contact
+                                email={portfolioData.email}
+                            />
+                        }
+                    />
 
-          element={<Projects />}
+                    <Route
+                        path="*"
+                        element={<NotFound />}
+                    />
 
-        />
+                </Routes>
+            </Suspense>
 
-        <Route
-
-          path="/contact"
-
-          element={
-
-            <Contact
-
-              email={portfolioData.email}
-
-            />
-
-          }
-
-        />
-
-        <Route
-
-          path="*"
-
-          element={<NotFound />}
-
-        />
-
-      </Routes>
-
-      <Footer />
-
-    </div>
-
-  );
-
+            <Footer />
+        </div>
+    );
 }
 
 export default App;
