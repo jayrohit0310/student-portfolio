@@ -6,12 +6,12 @@ function Navbar({ darkMode, setDarkMode }) {
   const menuItems = [
     { name: "Home", path: "/" },
     { name: "Projects", path: "/projects" },
+    { name: "Tasks", path: "/tasks" },
     { name: "Contact", path: "/contact" },
   ];
 
   return (
     <header className="navbar">
-
       <div className="logo">
         <h2>
           <span>J</span>ay<span>R</span>ohit
@@ -19,12 +19,9 @@ function Navbar({ darkMode, setDarkMode }) {
       </div>
 
       <nav>
-
         <ul className="nav-links">
-
           {menuItems.map((item) => (
             <li key={item.path}>
-
               <Link
                 to={item.path}
                 className={
@@ -35,25 +32,19 @@ function Navbar({ darkMode, setDarkMode }) {
               >
                 {item.name}
               </Link>
-
             </li>
           ))}
-
         </ul>
-
       </nav>
 
       <div className="nav-right">
-
         <button
           className="theme-btn"
           onClick={() => setDarkMode(!darkMode)}
         >
           {darkMode ? "☀" : "🌙"}
         </button>
-
       </div>
-
     </header>
   );
 }

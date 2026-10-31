@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 
 // Lazy Loading
 const Projects = lazy(() => import("./components/Projects"));
+const Tasks = lazy(() => import("./pages/Tasks"));
 const Contact = lazy(() => import("./pages/Contact"));
 
 import "./App.css";
@@ -45,7 +46,6 @@ function App() {
                 }
             >
                 <Routes>
-
                     <Route
                         path="/"
                         element={
@@ -62,6 +62,11 @@ function App() {
                     />
 
                     <Route
+                        path="/tasks"
+                        element={<Tasks />}
+                    />
+
+                    <Route
                         path="/contact"
                         element={
                             <Contact
@@ -74,7 +79,6 @@ function App() {
                         path="*"
                         element={<NotFound />}
                     />
-
                 </Routes>
             </Suspense>
 
